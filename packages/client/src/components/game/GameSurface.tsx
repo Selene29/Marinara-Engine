@@ -2611,9 +2611,9 @@ function GameSurfaceComponent({
   // Asset store
   const queryClient = useQueryClient();
   const activeChatIdRef = useRef(activeChatId);
+  activeChatIdRef.current = activeChatId;
   const combatAftermathPendingRef = useRef(false);
   useEffect(() => {
-    activeChatIdRef.current = activeChatId;
     combatAftermathPendingRef.current = false;
   }, [activeChatId]);
   const syncHudWidgetsToChatCache = useCallback(
@@ -6961,8 +6961,6 @@ function GameSurfaceComponent({
     pendingSharedWorldSetupApplyRef.current = pending;
     setPendingSharedWorldSetupApply(pending);
   }, []);
-  const activeChatIdRef = useRef(activeChatId);
-  activeChatIdRef.current = activeChatId;
   const clearPendingSharedWorldSetupApply = useCallback((chatId: string, attempt: number) => {
     const pending = pendingSharedWorldSetupApplyRef.current;
     if (activeChatIdRef.current !== chatId || !pending || pending.chatId !== chatId || pending.attempt !== attempt) {
